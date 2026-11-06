@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中国人文地理学家名片集 · 网页平台</title>
+<style>
+  :root{
+    --ink:#22302b;
+    --ink-soft:#5c6b64;
+    --pine:#2f5d50;
+    --pine-deep:#1d4034;
+    --pine-mist:#e7f0ec;
+    --cinnabar:#b5442e;
+    --paper:#f6f2e8;
+    --paper-card:#fffdf7;
+    --line:#ddd3bd;
+    --line-soft:#e8e1cf;
+    --serif:"Noto Serif SC","Source Han Serif SC","Songti SC",SimSun,serif;
+    --sans:"PingFang SC","Microsoft YaHei","Segoe UI",system-ui,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--sans);
+    color:var(--ink);
+    background-color:var(--paper);
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'><g fill='none' stroke='%232f5d50' stroke-opacity='0.05' stroke-width='1.1'><path d='M-20 60 C40 30 90 95 150 62 S250 30 290 66'/><path d='M-20 110 C40 80 90 145 150 112 S250 80 290 116'/><path d='M-20 160 C40 130 90 195 150 162 S250 130 290 166'/><path d='M-20 210 C40 180 90 245 150 212 S250 180 290 216'/><path d='M-20 260 C40 230 90 295 150 262 S250 230 290 266'/></g></svg>");
+    line-height:1.75;
+  }
+  a{color:var(--pine)}
+  ::selection{background:var(--pine);color:#fff}
+
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+  /* ============ 顶部导航 ============ */
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    background:rgba(246,242,232,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .topbar-inner{display:flex;align-items:center;justify-content:space-between;height:58px}
+  .brand{display:flex;align-items:center;gap:10px;cursor:pointer;text-decoration:none;color:var(--ink)}
+  .brand-seal{
+    width:34px;height:34px;border-radius:6px;background:var(--pine);color:#f6f2e8;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--serif);font-size:15px;font-weight:700;letter-spacing:1px;
+  }
+  .brand b{font-family:var(--serif);font-size:17px;letter-spacing:2px}
+  .topbar a.home-link{font-size:13.5px;color:var(--ink-soft);text-decoration:none;letter-spacing:1px}
+  .topbar a.home-link:hover{color:var(--pine)}
+
+  /* ============ 首页 HERO ============ */
+  .hero{padding:74px 0 40px;text-align:center;position:relative}
+  .hero .kicker{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:12.5px;letter-spacing:4px;color:var(--cinnabar);
+    border:1px solid rgba(181,68,46,.35);border-radius:999px;padding:5px 16px;margin-bottom:22px;
+  }
+  .hero h1{
+    font-family:var(--serif);font-size:clamp(34px,5.4vw,56px);
+    color:var(--pine-deep);letter-spacing:8px;font-weight:700;
+  }
+  .hero .sub{
+    margin-top:16px;font-family:var(--serif);font-size:clamp(14px,2vw,17px);
+    color:var(--ink-soft);letter-spacing:3px;
+  }
+  .hero .lede{
+    max-width:720px;margin:22px auto 0;font-size:14.5px;color:var(--ink-soft);text-align:justify;
+  }
+  .hero-stats{
+    display:flex;justify-content:center;gap:0;margin-top:34px;
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  }
+  .stat{padding:18px 34px;border-right:1px solid var(--line)}
+  .stat:last-child{border-right:none}
+  .stat b{display:block;font-family:var(--serif);font-size:26px;color:var(--pine)}
+  .stat span{font-size:12px;color:var(--ink-soft);letter-spacing:2px}
+
+  /* ============ 学科纪事 ============ */
+  .milestones{padding:44px 0 10px}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:22px}
+  .sec-head h2{font-family:var(--serif);font-size:22px;color:var(--pine-deep);letter-spacing:4px}
+  .sec-head .en{font-size:11px;letter-spacing:3px;color:var(--ink-soft);text-transform:uppercase}
+  .timeline-scroll{
+    overflow-x:auto;padding:8px 2px 18px;
+    -webkit-overflow-scrolling:touch;
+  }
+  .timeline{display:flex;gap:0;min-width:max-content;position:relative;padding-top:26px}
+  .timeline::before{
+    content:"";position:absolute;top:33px;left:0;right:0;height:2px;
+    background:repeating-linear-gradient(90deg,var(--pine) 0 8px,transparent 8px 14px);opacity:.4;
+  }
+  .tl-item{position:relative;width:168px;padding-right:18px;flex:none}
+  .tl-item::before{
+    content:"";position:absolute;top:1px;left:0;width:14px;height:14px;border-radius:50%;
+    background:var(--paper);border:3px solid var(--cinnabar);
+  }
+  .tl-item .y{font-family:var(--serif);font-weight:700;color:var(--cinnabar);font-size:16px;margin-top:-4px}
+  .tl-item .t{font-size:12.5px;color:var(--ink-soft);line-height:1.6;margin-top:4px}
+
+  /* ============ 名片墙 ============ */
+  .wall{padding:34px 0 30px}
+  .group-note{font-size:13px;color:var(--ink-soft);max-width:760px;margin:-8px 0 26px}
+  .cards{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(238px,1fr));gap:26px;
+  }
+  .card{
+    background:var(--paper-card);border:1px solid var(--line);border-radius:10px;
+    overflow:hidden;cursor:pointer;position:relative;
+    transition:transform .28s ease, box-shadow .28s ease, border-color .28s;
+    display:flex;flex-direction:column;
+  }
+  .card::after{
+    content:"";position:absolute;left:0;right:0;top:0;height:4px;
+    background:linear-gradient(90deg,var(--pine),#7fa894);
+    transform:scaleX(0);transform-origin:left;transition:transform .3s ease;
+  }
+  .card:hover{transform:translateY(-6px);box-shadow:0 16px 34px rgba(29,64,52,.16);border-color:#c9bfa4}
+  .card:hover::after{transform:scaleX(1)}
+  .card-photo{position:relative;aspect-ratio:3/4;overflow:hidden;background:#dfe7e2}
+  .card-photo img{width:100%;height:100%;object-fit:cover;object-position:center 22%;display:block;transition:transform .5s ease}
+  .card:hover .card-photo img{transform:scale(1.045)}
+  .card-badge{
+    position:absolute;top:10px;left:10px;
+    background:rgba(29,64,52,.86);color:#f0ede1;font-size:11px;letter-spacing:2px;
+    padding:4px 10px;border-radius:4px;backdrop-filter:blur(2px);
+  }
+  .card-body{padding:16px 18px 18px;display:flex;flex-direction:column;flex:1}
+  .card-name{font-family:var(--serif);font-size:22px;color:var(--ink);letter-spacing:2px;font-weight:700}
+  .card-name small{font-size:11.5px;color:var(--ink-soft);font-weight:400;letter-spacing:1px;margin-left:8px}
+  .card-years{font-size:12.5px;color:var(--cinnabar);letter-spacing:1.5px;margin-top:2px;font-family:var(--serif)}
+  .card-tag{font-size:12.8px;color:var(--ink-soft);margin-top:10px;line-height:1.7;flex:1}
+  .card-foot{
+    margin-top:14px;padding-top:10px;border-top:1px dashed var(--line);
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .card-foot .field{font-size:11.5px;color:var(--pine);letter-spacing:1px}
+  .card-foot .go{font-size:12px;color:var(--ink-soft)}
+  .card:hover .go{color:var(--cinnabar)}
+
+  .divider{
+    display:flex;align-items:center;gap:14px;margin:52px 0 26px;
+  }
+  .divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line)}
+  .divider span{font-family:var(--serif);font-size:15px;letter-spacing:5px;color:var(--ink-soft)}
+
+  /* ============ 详情页 ============ */
+  .back-bar{padding:20px 0 0}
+  .back-btn{
+    display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:var(--ink-soft);
+    text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:7px 18px;
+    background:var(--paper-card);transition:.2s;
+  }
+  .back-btn:hover{color:var(--pine);border-color:var(--pine)}
+  .p-hero{
+    display:grid;grid-template-columns:300px 1fr;gap:38px;
+    background:var(--paper-card);border:1px solid var(--line);border-radius:14px;
+    padding:34px;margin-top:22px;position:relative;overflow:hidden;
+  }
+  .p-hero::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:5px;
+    background:linear-gradient(90deg,var(--pine),#7fa894 60%,var(--cinnabar));
+  }
+  .p-photo{position:relative}
+  .p-photo img{
+    width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center 22%;
+    border-radius:8px;border:1px solid var(--line);
+  }
+  .p-photo .credit{font-size:10.5px;color:var(--ink-soft);margin-top:8px;line-height:1.5}
+  .p-photo .num{
+    position:absolute;top:-14px;right:-10px;
+    font-family:var(--serif);font-size:64px;color:rgba(47,93,80,.12);font-weight:700;line-height:1;
+  }
+  .p-info h1{font-family:var(--serif);font-size:clamp(30px,4vw,42px);color:var(--pine-deep);letter-spacing:4px}
+  .p-info .foreign{font-size:13px;color:var(--ink-soft);letter-spacing:2px;margin-top:4px}
+  .p-info .years-line{
+    font-family:var(--serif);font-size:16px;color:var(--cinnabar);margin-top:12px;letter-spacing:2px;
+  }
+  .p-info .identity{font-size:14px;color:var(--ink);margin-top:8px;font-weight:600}
+  .p-meta{
+    display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;
+  }
+  .meta-chip{
+    font-size:12px;background:var(--pine-mist);color:var(--pine-deep);
+    border:1px solid #cfe0d8;border-radius:999px;padding:4px 13px;letter-spacing:1px;
+  }
+  .p-summary{
+    margin-top:18px;font-size:14px;color:var(--ink-soft);text-align:justify;
+    padding:14px 16px;background:rgba(47,93,80,.05);border-left:3px solid var(--pine);border-radius:0 8px 8px 0;
+  }
+  .p-quote{
+    margin-top:18px;padding:16px 20px;border:1px dashed #c9bfa4;border-radius:8px;
+    font-family:var(--serif);font-size:16.5px;color:var(--pine-deep);letter-spacing:1px;
+  }
+  .p-quote .note{display:block;font-size:12px;color:var(--ink-soft);margin-top:8px;letter-spacing:1px;font-family:var(--sans)}
+
+  .p-sections{margin-top:34px;display:grid;gap:30px}
+  .sec{
+    background:var(--paper-card);border:1px solid var(--line);border-radius:14px;padding:28px 30px;
+  }
+  .sec h3{
+    font-family:var(--serif);font-size:19px;color:var(--pine-deep);letter-spacing:3px;
+    display:flex;align-items:center;gap:12px;margin-bottom:18px;
+  }
+  .sec h3 .idx{
+    font-size:11px;letter-spacing:2px;color:var(--cinnabar);border:1px solid rgba(181,68,46,.4);
+    border-radius:4px;padding:2px 8px;font-family:var(--sans);font-weight:400;
+  }
+  .sec h3::after{content:"";flex:1;height:1px;background:var(--line-soft)}
+  .sec p{font-size:14.5px;color:#3c463f;text-align:justify;margin-bottom:12px}
+  .sec p:last-child{margin-bottom:0}
+
+  /* 年表 */
+  .tl-v{position:relative;padding-left:26px}
+  .tl-v::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:var(--line)}
+  .tl-v-item{position:relative;padding-bottom:16px}
+  .tl-v-item:last-child{padding-bottom:0}
+  .tl-v-item::before{
+    content:"";position:absolute;left:-25px;top:7px;width:11px;height:11px;border-radius:50%;
+    background:var(--paper-card);border:3px solid var(--pine);
+  }
+  .tl-v-item .y{font-family:var(--serif);font-weight:700;color:var(--cinnabar);font-size:14.5px;letter-spacing:1px}
+  .tl-v-item .t{font-size:13.5px;color:#3c463f;line-height:1.7}
+
+  /* 成就条目 */
+  .ach-list{display:grid;gap:12px}
+  .ach-item{
+    display:flex;gap:14px;padding:14px 16px;background:rgba(47,93,80,.045);
+    border-radius:8px;border:1px solid var(--line-soft);
+  }
+  .ach-item .n{
+    flex:none;width:26px;height:26px;border-radius:50%;background:var(--pine);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:12.5px;font-family:var(--serif);
+  }
+  .ach-item .txt{font-size:13.8px;color:#3c463f;text-align:justify;line-height:1.8}
+  .ach-item .txt b{color:var(--pine-deep)}
+
+  /* 文献条目 */
+  .doc-list{display:grid;gap:10px}
+  .doc{
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    border:1px solid var(--line);border-radius:8px;padding:13px 16px;background:#fffef9;
+    transition:.2s;flex-wrap:wrap;
+  }
+  .doc:hover{border-color:var(--pine);background:var(--pine-mist)}
+  .doc .l .t{font-size:14px;color:var(--ink);font-weight:600}
+  .doc .l .m{font-size:12px;color:var(--ink-soft);margin-top:3px}
+  .doc-btn{
+    flex:none;font-size:12.5px;text-decoration:none;border-radius:6px;padding:6px 14px;
+    border:1px solid var(--pine);color:var(--pine);letter-spacing:1px;transition:.2s;display:inline-flex;align-items:center;gap:6px;
+  }
+  .doc-btn:hover{background:var(--pine);color:#fff}
+  .doc-btn.plain{border-color:var(--line);color:var(--ink-soft);cursor:default}
+  .doc-btn.plain:hover{background:transparent;color:var(--ink-soft)}
+
+  /* 视频 */
+  .video-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px}
+  .video-card{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#0d1512}
+  .video-frame{position:relative;aspect-ratio:16/9;background:#101a16}
+  .video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .v-zoom{
+    position:absolute;top:8px;right:8px;z-index:6;
+    height:30px;padding:0 12px;border:none;border-radius:15px;cursor:pointer;
+    background:rgba(13,21,18,.72);color:#e9e4d4;font-size:12.5px;letter-spacing:2px;
+    display:flex;align-items:center;gap:5px;opacity:0;transition:.2s;
+  }
+  .v-zoom::before{content:"";width:9px;height:9px;border:1.6px solid #e9e4d4;border-radius:2px;box-shadow:2.5px 2.5px 0 -0.6px #e9e4d4}
+  .video-frame:hover .v-zoom{opacity:1}
+  .video-frame.zoomed .v-zoom{opacity:0;pointer-events:none}
+  @media (hover:none){.v-zoom{opacity:.9}}
+  .zoom-overlay{
+    position:fixed;inset:0;z-index:150;background:rgba(9,15,13,.9);
+    backdrop-filter:blur(5px);animation:fadeIn .25s ease;
+  }
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  .video-frame.zoomed{
+    position:fixed;z-index:160;top:50%;left:50%;
+    width:min(100vw,calc(100vh*16/9 - 120px),1200px);
+    aspect-ratio:16/9;transform:translate(-50%,-50%);
+    border-radius:12px;overflow:hidden;
+    box-shadow:0 30px 90px rgba(0,0,0,.65);
+    border:1px solid rgba(255,255,255,.16);
+  }
+  .zoom-close{
+    position:fixed;top:16px;right:20px;z-index:170;
+    height:38px;padding:0 20px;border-radius:19px;border:1px solid rgba(233,228,212,.4);
+    background:rgba(13,21,18,.8);color:#e9e4d4;font-size:13.5px;letter-spacing:2px;cursor:pointer;
+    transition:.2s;
+  }
+  .zoom-close:hover{background:var(--cinnabar);border-color:var(--cinnabar)}
+  .zoom-hint{
+    position:fixed;top:26px;left:24px;z-index:170;color:rgba(233,228,212,.55);
+    font-size:12px;letter-spacing:2px;pointer-events:none;
+  }
+  .video-placeholder{
+    position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
+    cursor:pointer;background:
+      radial-gradient(ellipse at 30% 20%,rgba(47,93,80,.55),transparent 60%),
+      radial-gradient(ellipse at 75% 80%,rgba(181,68,46,.35),transparent 55%),#101a16;
+    transition:.25s;
+  }
+  .video-placeholder:hover{filter:brightness(1.15)}
+  .play-btn{
+    width:62px;height:62px;border-radius:50%;background:rgba(246,242,232,.94);
+    display:flex;align-items:center;justify-content:center;box-shadow:0 6px 22px rgba(0,0,0,.4);
+  }
+  .play-btn::after{content:"";border-style:solid;border-width:11px 0 11px 19px;border-color:transparent transparent transparent var(--pine-deep);margin-left:5px}
+  .video-placeholder .vp-t{color:#e9e4d4;font-size:13px;letter-spacing:2px;padding:0 18px;text-align:center}
+  .video-meta{padding:12px 15px;background:var(--paper-card);border-top:1px solid var(--line-soft)}
+  .video-meta .t{font-size:13.5px;font-weight:600;color:var(--ink);line-height:1.5}
+  .video-meta .u{font-size:11.5px;color:var(--ink-soft);margin-top:4px}
+  .video-external{display:block;text-decoration:none}
+  .video-external .video-placeholder{position:relative;aspect-ratio:16/9}
+
+  /* 成果图 */
+  .extra-fig{margin-top:6px}
+  .extra-fig img{max-width:100%;border-radius:8px;border:1px solid var(--line)}
+  .extra-fig figcaption{font-size:12.5px;color:var(--ink-soft);margin-top:10px;line-height:1.7}
+
+  /* 上/下一位 */
+  .pn-nav{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:34px 0 8px}
+  .pn-card{
+    border:1px solid var(--line);border-radius:10px;padding:16px 20px;text-decoration:none;background:var(--paper-card);
+    transition:.2s;display:block;
+  }
+  .pn-card:hover{border-color:var(--pine);transform:translateY(-3px);box-shadow:0 10px 22px rgba(29,64,52,.1)}
+  .pn-card .dir{font-size:11px;color:var(--ink-soft);letter-spacing:3px}
+  .pn-card .nm{font-family:var(--serif);font-size:18px;color:var(--pine-deep);margin-top:6px;letter-spacing:2px}
+  .pn-card.next{text-align:right}
+
+  footer{
+    margin-top:64px;border-top:1px solid var(--line);background:var(--pine-deep);color:#cfe0d8;
+  }
+  .foot-inner{max-width:1120px;margin:0 auto;padding:34px 24px 40px;display:grid;gap:10px}
+  footer .f-title{font-family:var(--serif);font-size:16px;letter-spacing:3px;color:#f0ede1}
+  footer p{font-size:12.5px;line-height:1.9;color:#a8bfb4}
+  footer .f-note{font-size:11.5px;color:#7e968b;margin-top:8px}
+
+  .empty{padding:80px 0;text-align:center;color:var(--ink-soft)}
+
+  /* ============ 响应式 ============ */
+  @media (max-width:820px){
+    .p-hero{grid-template-columns:1fr;padding:24px}
+    .p-photo{max-width:300px}
+    .hero{padding:50px 0 30px}
+    .stat{padding:14px 18px}
+    .stat b{font-size:21px}
+    .sec{padding:22px 20px}
+    .pn-nav{grid-template-columns:1fr}
+    .pn-card.next{text-align:left}
+  }
+  @media (max-width:560px){
+    .cards{grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:14px}
+    .card-name{font-size:18px}
+    .card-tag{font-size:11.5px}
+    .hero-stats{flex-wrap:wrap}
+    .stat{border-right:none;flex:1 1 40%}
+  }
+
+  /* ============ 打印 ============ */
+  @media print{
+    body{background:#fff}
+    .topbar,.back-bar,.video-grid,.pn-nav,.hero-stats,.timeline-scroll{display:none!important}
+    .sec,.p-hero{break-inside:avoid;box-shadow:none}
+  }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="#/" onclick="go('/')">
+      <span class="brand-seal">地</span>
+      <b>人文地理学家名片集</b>
+    </a>
+    <a class="home-link" href="#/" onclick="go('/')">返回名片墙</a>
+  </div>
+</header>
+
+<main id="app" class="wrap"></main>
+
+<footer>
+  <div class="foot-inner">
+    <div class="f-title">中国人文地理学家名片集 · 网页平台</div>
+    <p>本平台收录张相文、竺可桢、胡焕庸、林超、周立三、李旭旦、谭其骧、任美锷、吴传钧、陆大道十位中国人文地理学家，以及拉采尔、白兰士、大卫·哈维三位世界人文地理学大师。每位人物均含生平经历、学术成就、代表作与相关文章（可点击阅读原文）、介绍视频。</p>
+    <p>文献PDF取自课程文献库（“文献”文件夹），人物照片来自中国科学院、各高校官网及权威媒体，视频来自Bilibili、中国科学院档案馆、九三学社官网等公开平台，仅用于课程学习与教学交流。</p>
+    <p class="f-note">2026年11月 · 人文地理学课程学习资料 · 资料截至收录之日均经链接有效性核验</p>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script>
+  const app = document.getElementById("app");
+  const esc = s => String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  const byId = id => PERSONS.find(p=>p.id===id);
+
+  /* ---------- 首页 ---------- */
+  function cardHTML(p){
+    return `<article class="card" onclick="go('/p/${p.id}')">
+      <div class="card-photo">
+        <img src="${p.photo}" alt="${esc(p.name)}" loading="lazy">
+        <span class="card-badge">${p.region==="cn"?"中国":"世界"}</span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">${esc(p.name)}<small>${esc(p.foreign)}</small></div>
+        <div class="card-years">${esc(p.years)}</div>
+        <div class="card-tag">${esc(p.tag)}</div>
+        <div class="card-foot">
+          <span class="field">◉ ${esc(p.field)}</span>
+          <span class="go">查看名片 →</span>
+        </div>
+      </div>
+    </article>`;
+  }
+
+  function renderHome(){
+    const cn = PERSONS.filter(p=>p.region==="cn");
+    const wd = PERSONS.filter(p=>p.region!=="cn");
+    const totalLinks = PERSONS.reduce((n,p)=>n+p.papers.filter(x=>x.link).length + p.works.filter(x=>x.link).length,0);
+    const totalVideos = PERSONS.reduce((n,p)=>n+p.videos.length,0);
+    app.innerHTML = `
+      <section class="hero">
+        <span class="kicker">HUANENG · GEOGRAPHERS</span>
+        <h1>中国人文地理学家名片集</h1>
+        <div class="sub">生平 · 成就 · 代表作 · 介绍视频</div>
+        <p class="lede">从 1909 年张相文创立中国地学会，到“胡焕庸线”“人地关系地域系统”“点—轴系统”相继问世，中国人文地理学走过百余年历程。这里收录十五位奠基者与大师的名片——点开任意一张，走进他们的世界。</p>
+        <div class="hero-stats">
+          <div class="stat"><b>${PERSONS.length}</b><span>位人物</span></div>
+          <div class="stat"><b>${totalLinks}</b><span>条可读文献</span></div>
+          <div class="stat"><b>${totalVideos}</b><span>个介绍视频</span></div>
+          <div class="stat"><b>100+</b><span>年学科史</span></div>
+        </div>
+      </section>
+
+      <section class="milestones">
+        <div class="sec-head"><h2>学科纪事</h2><span class="en">Milestones of Chinese Human Geography</span></div>
+        <div class="timeline-scroll"><div class="timeline">
+          ${MILESTONES.map(m=>`<div class="tl-item"><div class="y">${esc(m.y)}</div><div class="t">${esc(m.t)}</div></div>`).join("")}
+        </div></div>
+      </section>
+
+      <section class="wall">
+        <div class="sec-head"><h2>中国人文地理学大家</h2><span class="en">按出生年份排序</span></div>
+        <p class="group-note">十位大家跨越一个多世纪：张相文奠基、竺可桢立学、胡焕庸划线、林超与周立三建所兴学、李旭旦复兴学科、谭其骧贯通古今、任美锷经略海岸、吴传钧立言人地、陆大道谋篇国土。</p>
+        <div class="cards">${cn.map(cardHTML).join("")}</div>
+
+        <div class="divider"><span>世界人文地理学大师</span></div>
+        <p class="group-note">三位大师代表人文地理学的三个时代：拉采尔奠基学科、白兰士开创学派、哈维引领批判转向——中国人文地理学正是在与他们的对话中生长起来。</p>
+        <div class="cards">${wd.map(cardHTML).join("")}</div>
+      </section>`;
+  }
+
+  /* ---------- 详情页 ---------- */
+  function docHTML(d){
+    const btn = d.link
+      ? `<a class="doc-btn" href="${d.link.url}" target="_blank" rel="noopener" onclick="event.stopPropagation()">↗ ${esc(d.link.label)}</a>`
+      : `<span class="doc-btn plain">馆藏文献</span>`;
+    return `<div class="doc">
+      <div class="l"><div class="t">${esc(d.t)}</div><div class="m">${esc(d.m)}</div></div>
+      ${btn}
+    </div>`;
+  }
+
+  function videoHTML(v){
+    if(v.bvid){
+      return `<div class="video-card">
+        <div class="video-frame" id="vf-${v.bvid}">
+          <div class="video-placeholder" data-bvid="${v.bvid}" onclick="loadVideo(this)">
+            <div class="play-btn"></div>
+            <div class="vp-t">点击加载视频</div>
+          </div>
+          <button class="v-zoom" onclick="toggleZoom(this)">放大</button>
+        </div>
+        <div class="video-meta">
+          <div class="t">${esc(v.t)}</div>
+          <div class="u">UP主：${esc(v.up)} · <a href="${v.url}" target="_blank" rel="noopener">B站页面</a></div>
+        </div>
+      </div>`;
+    }
+    return `<a class="video-card video-external" href="${v.url}" target="_blank" rel="noopener">
+      <div class="video-frame">
+        <div class="video-placeholder">
+          <div class="play-btn"></div>
+          <div class="vp-t">前往外部视频页 ▶</div>
+        </div>
+      </div>
+      <div class="video-meta">
+        <div class="t">${esc(v.t)}</div>
+        <div class="u">来源：${esc(v.up)}${v.note?" · "+esc(v.note):""}</div>
+      </div>
+    </a>`;
+  }
+
+  function renderPerson(id){
+    const p = byId(id);
+    if(!p){ renderHome(); return; }
+    const idx = PERSONS.indexOf(p);
+    const prev = PERSONS[(idx-1+PERSONS.length)%PERSONS.length];
+    const next = PERSONS[(idx+1)%PERSONS.length];
+    const secNo = ["壹","贰","叁","肆","伍","陆"];
+    const quoteHTML = p.quote ? `<div class="p-quote">“${esc(p.quote.text)}”<span class="note">${esc(p.quote.note)}</span></div>` : "";
+    const extraHTML = p.extra ? `<figure class="extra-fig"><img src="${p.extra.img}" alt="${esc(p.extra.caption)}"><figcaption>${esc(p.extra.caption)}</figcaption></figure>` : "";
+    const readableWorks = p.works.some(w=>w.link);
+    app.innerHTML = `
+      <div class="back-bar"><a class="back-btn" href="#/" onclick="go('/')">← 返回名片墙</a></div>
+
+      <section class="p-hero">
+        <div class="p-photo">
+          <span class="num">${String(idx+1).padStart(2,"0")}</span>
+          <img src="${p.photo}" alt="${esc(p.name)}">
+          <div class="credit">${esc(p.photoCredit)}</div>
+        </div>
+        <div class="p-info">
+          <h1>${esc(p.name)}</h1>
+          <div class="foreign">${esc(p.foreign)}</div>
+          <div class="years-line">${esc(p.years)}</div>
+          <div class="identity">${esc(p.identity)}</div>
+          <div class="p-meta">
+            <span class="meta-chip">◉ ${esc(p.field)}</span>
+            <span class="meta-chip">籍贯 · ${esc(p.birthplace)}</span>
+            <span class="meta-chip">${p.region==="cn"?"中国人文地理学家":"世界人文地理学大师"}</span>
+          </div>
+          <div class="p-summary">${esc(p.summary)}</div>
+          ${quoteHTML}
+        </div>
+      </section>
+
+      <div class="p-sections">
+        <section class="sec">
+          <h3><span class="idx">${secNo[0]}</span>生平经历</h3>
+          ${p.bio.map(x=>`<p>${esc(x)}</p>`).join("")}
+        </section>
+
+        <section class="sec">
+          <h3><span class="idx">${secNo[1]}</span>人生大事记</h3>
+          <div class="tl-v">
+            ${p.timeline.map(t=>`<div class="tl-v-item"><div class="y">${esc(t.y)}</div><div class="t">${esc(t.t)}</div></div>`).join("")}
+          </div>
+        </section>
+
+        <section class="sec">
+          <h3><span class="idx">${secNo[2]}</span>主要成就</h3>
+          <div class="ach-list">
+            ${p.achievements.map((a,i)=>`<div class="ach-item"><span class="n">${i+1}</span><div class="txt">${esc(a)}</div></div>`).join("")}
+          </div>
+        </section>
+
+        <section class="sec">
+          <h3><span class="idx">${secNo[3]}</span>代表作</h3>
+          <div class="doc-list">${p.works.map(docHTML).join("")}</div>
+          ${extraHTML}
+        </section>
+
+        <section class="sec">
+          <h3><span class="idx">${secNo[4]}</span>相关文章</h3>
+          <div class="doc-list">${p.papers.map(docHTML).join("")}</div>
+        </section>
+
+        <section class="sec">
+          <h3><span class="idx">${secNo[5]}</span>介绍视频</h3>
+          <div class="video-grid">${p.videos.map(videoHTML).join("")}</div>
+        </section>
+      </div>
+
+      <nav class="pn-nav">
+        <a class="pn-card prev" href="#/p/${prev.id}" onclick="go('/p/${prev.id}')">
+          <div class="dir">← 上一位</div><div class="nm">${esc(prev.name)} <small style="font-size:12px;color:var(--ink-soft)">${esc(prev.years)}</small></div>
+        </a>
+        <a class="pn-card next" href="#/p/${next.id}" onclick="go('/p/${next.id}')">
+          <div class="dir">下一位 →</div><div class="nm">${esc(next.name)} <small style="font-size:12px;color:var(--ink-soft)">${esc(next.years)}</small></div>
+        </a>
+      </nav>`;
+  }
+
+  /* ---------- 视频懒加载与放大缩小 ---------- */
+  function loadVideo(el){
+    const bvid = el.dataset.bvid;
+    el.outerHTML = `<iframe src="https://player.bilibili.com/player.html?bvid=${bvid}&page=1&high_quality=1&danmaku=0&autoplay=0" scrolling="no" frameborder="no" allowfullscreen="true"></iframe>`;
+  }
+
+  function toggleZoom(btn){
+    const frame = btn.parentElement;
+    if(!frame.querySelector("iframe")){
+      const ph = frame.querySelector(".video-placeholder");
+      if(ph) loadVideo(ph);
+    }
+    if(frame.classList.contains("zoomed")){ unzoom(frame); } else { zoom(frame); }
+  }
+  function zoom(frame){
+    closeZoom();
+    frame.classList.add("zoomed");
+    const ov = document.createElement("div");
+    ov.className = "zoom-overlay"; ov.id = "zoomOverlay";
+    ov.onclick = () => unzoom(frame);
+    document.body.appendChild(ov);
+    const bar = document.createElement("button");
+    bar.className = "zoom-close"; bar.id = "zoomClose"; bar.textContent = "✕ 缩小";
+    bar.onclick = e => { e.stopPropagation(); unzoom(frame); };
+    document.body.appendChild(bar);
+    const hint = document.createElement("span");
+    hint.className = "zoom-hint"; hint.id = "zoomHint"; hint.textContent = "大屏播放 · 点击空白处或按 ESC 缩小";
+    document.body.appendChild(hint);
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", zoomEsc);
+  }
+  function unzoom(frame){
+    frame.classList.remove("zoomed");
+    ["zoomOverlay","zoomClose","zoomHint"].forEach(id => { const el = document.getElementById(id); if(el) el.remove(); });
+    document.body.style.overflow = "";
+    document.removeEventListener("keydown", zoomEsc);
+  }
+  function closeZoom(){
+    const z = document.querySelector(".video-frame.zoomed");
+    if(z) unzoom(z);
+  }
+  function zoomEsc(e){ if(e.key === "Escape") closeZoom(); }
+
+  /* ---------- 路由 ---------- */
+  function go(path){ location.hash = path==="/" ? "/" : path; }
+  function route(){
+    const h = location.hash.replace(/^#/,"");
+    const m = h.match(/^\/p\/([\w-]+)/);
+    if(m){ renderPerson(m[1]); } else { renderHome(); }
+    window.scrollTo(0,0);
+  }
+  window.addEventListener("hashchange",route);
+  route();
+</script>
+</body>
+</html>
